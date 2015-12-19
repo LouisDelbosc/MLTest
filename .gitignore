@@ -1,1 +1,6 @@
 MNIST_DATA
+*pyc
+data
+checkpoint
+data-999
+data-1999
