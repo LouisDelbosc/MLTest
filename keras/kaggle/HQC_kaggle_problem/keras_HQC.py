@@ -37,14 +37,23 @@ def save2model(submission, file_name, y_pre):
     print ("saved files %s" % file_name)
 
 def getDummy(df, col):
+    # For one column, it gets all the differents values
     category_values = df[col].unique()
+    # Create a matrix len(category_values) * len(df) with only 0
     data = [[0 for i in range(len(category_values))] for i in range(len(df))]
     dic_category = dict()
+    # Create a dictionnary {value: i} (value can be string/char/numbers/etc)
     for i, val in enumerate(list(category_values)):
         dic_category[str(val)] = i
+    # df[col][i] => value of one elt
+    # Create an extension matrix for the dataframe which contains
+    # column for each different value of df[col]
+    # The available value inside those news columns are 0 or 1
     for i in range(len(df)):
         data[i][dic_category[str(df[col][i])]] = 1
-    data = np.array(data)
+    data = np.array(data) #Transform into np.array
+    # Extend the dataframe with the new matrix, and create columns name
+    # With the name of the feature join with '_'
     for i, val in enumerate(list(category_values)):
         df.loc[:, "_".join([col, str(val)])] = data[:, i]
     return df
