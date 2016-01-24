@@ -1,4 +1,5 @@
 MNIST_DATA
+intraQuarter
 *pyc
 data
 checkpoint
